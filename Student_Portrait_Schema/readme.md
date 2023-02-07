@@ -41,16 +41,22 @@ Table details pulled from: [Moodle 4.0 Database Schema info](https://www.examula
 | [course_sections](https://www.examulator.com/er/4.0/tables/course_sections.html) | data around sections/classes per course offered by the system. | 5 |
 | [user](https://www.examulator.com/er/4.0/tables/user.html), [role_assignments](https://www.examulator.com/er/4.0/tables/role_assignments.html), and [role](https://www.examulator.com/er/4.0/tables/role.html) | data around users - one record per person in the system (other two tables are necessary to distinguish students from instructors). | 6 |
 | [enrol](https://www.examulator.com/er/4.0/tables/enrol.html) and [user_enrolments](https://www.examulator.com/er/4.0/tables/user_enrolments.html) | data around users enrollment, maps enrol and user tables together to separate student vs. instructor enrollment. | 7, 8 |
-| [assign](https://www.examulator.com/er/4.0/tables/assign.html), [assignment](https://www.examulator.com/er/4.0/tables/assignment.html) and/or [assignment_submissions](https://www.examulator.com/er/4.0/tables/assignment_submissions.html) | describes info around assignments (or assignment submissions). Table is generated from instance of mod_assign  with info. | 9, 14 |
+| [assign](https://www.examulator.com/er/4.0/tables/assign.html) [assign_user_mapping](https://www.examulator.com/er/4.0/tables/assign_user_mapping.html), [assignment](https://www.examulator.com/er/4.0/tables/assignment.html) and/or [assignment_submissions](https://www.examulator.com/er/4.0/tables/assignment_submissions.html) | describes info around assignments (or assignment submissions). Table is generated from instance of mod_assign with info. assign_user_mapping is needed to map assignments relevant to particular users. | 9, 14 |
 | [forum](https://www.examulator.com/er/4.0/tables/forum.html) | data around forums and structured/assigned discussions. | 10 |
 | [quiz](https://www.examulator.com/er/4.0/tables/quiz.html), [quiz_attempts](https://www.examulator.com/er/4.0/tables/quiz_attempts.html), and [quiz_grades](https://www.examulator.com/er/4.0/tables/quiz_grades.html) | data around quizzes and student-quiz attempts. | 11, 16 |
 | [lesson](https://www.examulator.com/er/4.0/tables/lesson.html) and [lesson_attempts](https://www.examulator.com/er/4.0/tables/lesson_attempts.html) (maybe [lesson_answers](https://www.examulator.com/er/4.0/tables/lesson_answers.html) as well) | data around lessons and student-lesson attempts. | 12, 17 |
 | [assignsubmission_file](https://www.examulator.com/er/4.0/tables/assignsubmission_file.html) | describes info around assignment file submissions. | 13 |
-| [post](https://www.examulator.com/er/4.0/tables/post.html) | data around posts/blog-entries recorded. | 15, 10* |
+| [post](https://www.examulator.com/er/4.0/tables/post.html) and/or [forum_posts](https://www.examulator.com/er/4.0/tables/forum_posts.html) | data around posts/blog-entries recorded. Second table contains data surrounding forum-specific posts. | 15, 10* |
 | [messages](https://www.examulator.com/er/4.0/tables/assign.html) and/or [message_user_actions](https://www.examulator.com/er/4.0/tables/message_user_actions.html) | data around messages throughout the system (or, in the second case, message actions per-user). | 18, 19*, 10* |
 
 
 *NOTE: * indicates uncertainty if this is completely applicable.*
+
+Additional (possibly useful tables):
+| Table Name | Description |
+| --- | --- |
+| [stats_daily](https://www.examulator.com/er/4.0/tables/stats_daily.html) | Moodle generated daily stats per course/role (think this breaks down stats at a per-user-level). |
+| [user_lastaccess](https://www.examulator.com/er/4.0/tables/user_lastaccess.html) | Keeps track of course page access times. Probably most useful for table 20 in the schema. |
 
 ## Related-Moodle Schemas
 ### Assign
