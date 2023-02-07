@@ -39,9 +39,11 @@ Table details pulled from: [Moodle 4.0 Database Schema info](https://www.examula
 | [sessions](https://www.examulator.com/er/4.0/tables/sessions.html) | data around sessions in the education system (e.g. Spring 2023). | 4 |
 | [course_sections](https://www.examulator.com/er/4.0/tables/course_sections.html) | data around sections/classes per course offered by the system. | 5 |
 | [user](https://www.examulator.com/er/4.0/tables/user.html), [role_assignments](https://www.examulator.com/er/4.0/tables/role_assignments.html), and [role](https://www.examulator.com/er/4.0/tables/role.html) | data around users - one record per person in the system (other two tables are necessary to distinguish students from instructors). | 6 |
+| [enrol](https://www.examulator.com/er/4.0/tables/enrol.html) and [user_enrolments](https://www.examulator.com/er/4.0/tables/user_enrolments.html) | data around users enrollment, maps enrol and user tables together to separate student vs. instructor enrollment. | 7, 8 |
 | [assign](https://www.examulator.com/er/4.0/tables/assign.html), [assignment](https://www.examulator.com/er/4.0/tables/assignment.html) and/or [assignment_submissions](https://www.examulator.com/er/4.0/tables/assignment_submissions.html) | info around assignments (or assignment submissions). Table is generated from instance of mod_assign  with info. | 9, 13, 14 |
-| [messages](https://www.examulator.com/er/4.0/tables/assign.html) and/or [message_user_actions](https://www.examulator.com/er/4.0/tables/message_user_actions.html) | data around messages throughout the system (or, in the second case, message actions per-user). | 18, 19* |
 | [post](https://www.examulator.com/er/4.0/tables/post.html) | data around posts/blog-entries recorded. | 15 |
+| [messages](https://www.examulator.com/er/4.0/tables/assign.html) and/or [message_user_actions](https://www.examulator.com/er/4.0/tables/message_user_actions.html) | data around messages throughout the system (or, in the second case, message actions per-user). | 18, 19* |
+
 
 *NOTE: * indicates uncertainty if this is completely applicable.*
 
