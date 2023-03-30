@@ -1,6 +1,22 @@
-# Student Portrait Schema Solution
+<img align="right" height="75" src="https://github.com/microsoft/OpenEduAnalytics/blob/main/docs/pics/oea-logo-nobg.png">
 
-## Analytikus-Defined Schema
+# Student Portrait Solution
+[Student Portrait](https://www.analytikus.com/learning-analytics) by [Analytikus](https://www.analytikus.com/) is an analytical solution that uses artificial intelligence to get to know all students and support them through personalized messaging. It identifies key student variables and characteristics, then nudges them through short, concise messages, that are personalized and engaging, in a timely manner to maximize student success. 
+
+With the Student Portrait solution, educational institutions can understand how students learn in order to maximize their performance, satisfaction and motivation by delivering personalized nudges through a virtual pedagogical bot. It ensures the best outcomes for students with a 360-degree view of activities and engagement, followed by the provisioning of the right services and support at the optimal time. 
+
+<p align="center">
+  <img src="https://github.com/microsoft/OpenEduAnalytics/blob/main/schemas/schema_catalog/Student_Portrait_Schema/docs/images/Student_Portrait_Solution_Overview.png" alt="Student Portrait Solution"/>
+</p>
+
+Portrait is operationalized through two AI agents: Emilia, a learning therapist, and Max, an organizational assistant, and uses data from multiple sources including LMS (Moodle, Canvas, Blackboard, etc), SIS, Microsoft Teams, Reflect, etc.
+
+## Data Schema
+The Student Portrait data schema has 24 data entities. The Data Entities table below provides the description and update frequency of each data entity.
+
+We are working toward aligning data sources/OEA modules like Canvas and Moodle to the Student Portrait schema, and this will include the creation of the technical assets (notebooks, pipelines, etc) to facilitate this. Please check this folder in a few weeks for updates to the Student Portrait schema.
+
+### Data Entities
 
 |# | Input | Description | Update Frequency |
 |-----------|-----------|-----------|-----------|
@@ -29,61 +45,202 @@
 | 23 | Programs_users | Relationship between students and programs in which they are enrolled | Weekly |
 | 24 | Courses_programs | Relationship between courses and programs in which they are taught | Weekly |
 
-## Schema-Related Tables from Moodle
-
-Table details pulled from: [Moodle 4.0 Database Schema info](https://www.examulator.com/er/4.0/)
-
-| Table Name | Description | Relevant Table in SPS |
-| --- | --- | --- |
-| [course_categories](https://www.examulator.com/er/4.0/tables/course_categories.html) | data around the categories to which each course belongs. (Thinking this acts as a Programs table per schema above?) Thinking this table combined with course, enrollment, users, and roles can be used to develop tables 23 and 24. | 2, 23*, 24* |
-| [course](https://www.examulator.com/er/4.0/tables/course.html) | data around courses offered by the system. | 3 |
-| [sessions](https://www.examulator.com/er/4.0/tables/sessions.html) | data around sessions in the education system (e.g. Spring 2023). | 4 |
-| [course_sections](https://www.examulator.com/er/4.0/tables/course_sections.html) | data around sections/classes per course offered by the system. | 5 |
-| [user](https://www.examulator.com/er/4.0/tables/user.html), [role_assignments](https://www.examulator.com/er/4.0/tables/role_assignments.html), and [role](https://www.examulator.com/er/4.0/tables/role.html) | data around users - one record per person in the system (other two tables are necessary to distinguish students from instructors). | 6 |
-| [enrol](https://www.examulator.com/er/4.0/tables/enrol.html) and [user_enrolments](https://www.examulator.com/er/4.0/tables/user_enrolments.html) | data around users enrollment, maps enrol and user tables together to separate student vs. instructor enrollment. | 7, 8 |
-| [assign](https://www.examulator.com/er/4.0/tables/assign.html) [assign_user_mapping](https://www.examulator.com/er/4.0/tables/assign_user_mapping.html), [assignment](https://www.examulator.com/er/4.0/tables/assignment.html) and/or [assignment_submissions](https://www.examulator.com/er/4.0/tables/assignment_submissions.html) | describes info around assignments (or assignment submissions). Table is generated from instance of mod_assign with info. assign_user_mapping is needed to map assignments relevant to particular users. | 9, 14 |
-| [forum](https://www.examulator.com/er/4.0/tables/forum.html) | data around forums and structured/assigned discussions. | 10 |
-| [quiz](https://www.examulator.com/er/4.0/tables/quiz.html), [quiz_attempts](https://www.examulator.com/er/4.0/tables/quiz_attempts.html), and [quiz_grades](https://www.examulator.com/er/4.0/tables/quiz_grades.html) | data around quizzes and student-quiz attempts. | 11, 16 |
-| [lesson](https://www.examulator.com/er/4.0/tables/lesson.html) and [lesson_attempts](https://www.examulator.com/er/4.0/tables/lesson_attempts.html) (maybe [lesson_answers](https://www.examulator.com/er/4.0/tables/lesson_answers.html) as well) | data around lessons and student-lesson attempts. | 12, 17 |
-| [assignsubmission_file](https://www.examulator.com/er/4.0/tables/assignsubmission_file.html) | describes info around assignment file submissions. | 13 |
-| [post](https://www.examulator.com/er/4.0/tables/post.html) and/or [forum_posts](https://www.examulator.com/er/4.0/tables/forum_posts.html) | data around posts/blog-entries recorded. Second table contains data surrounding forum-specific posts. | 15, 10* |
-| [messages](https://www.examulator.com/er/4.0/tables/assign.html) and/or [message_user_actions](https://www.examulator.com/er/4.0/tables/message_user_actions.html) | data around messages throughout the system (or, in the second case, message actions per-user). | 18, 19*, 10* |
-
-
-*NOTE: * indicates uncertainty if this is completely applicable.*
-
-Additional (possibly useful tables):
-| Table Name | Description |
-| --- | --- |
-| [stats_daily](https://www.examulator.com/er/4.0/tables/stats_daily.html) | Moodle generated daily stats per course/role (think this breaks down stats at a per-user-level). |
-| [user_lastaccess](https://www.examulator.com/er/4.0/tables/user_lastaccess.html) | Keeps track of course page access times. Probably most useful for table 20 in the schema. |
-
-## Related-Moodle Schemas
-### Assign
-<details><summary>Expand Assign Schema</summary>
-<p>
-
-Moodle - Assign Table:
-| Column Name | Column Type | Description |
-| --- | --- | --- |
-| id | int | general assignment id |
-| course | int | |
-| name |  |  |
-
+<p align="center">
+  <img src="https://github.com/microsoft/OpenEduAnalytics/blob/main/schemas/schema_catalog/Student_Portrait_Schema/docs/images/Student_Portrait_Input_Entities.png" alt="Student Portrait Schema Input Entities"/>
 </p>
-</details>
 
-Possible relevant Moodle APIs:
-| API | Description | Relevant to Table in SPS |
-| --- | --- | --- |
-| [Events API](https://docs.moodle.org/dev/Events_API) | allows you to log events in Moddle (Think this is to be used with Logging API). | |
-| [Logging 2 API](https://docs.moodle.org/dev/Logging_2) | describes how logs are stored and retrieved. | |
-| [Data Manipulation API](https://docs.moodle.org/dev/Data_manipulation_API)| describes how to use available functions to access data from Moodle db - will be important for productionalizing. | [x] |
+### Detailed Information on Data Entities
 
-Other relevant resources
-| Resource | Description |
-| --- | --- |
-| [Data formats documentation](https://www.examulator.com/er/4.0/tables/assign.html) | This table saves information about an instance of ```mod_assign```; whenever an assignment is modified |
-| [Teacher-Level Progress Tracking](https://docs.moodle.org/400/en/Tracking_progress) | explains how Moodle can be used by teachers to track course progress - also can be |
-| [Moodle Database Schema info](https://moodledev.io/docs/apis/core/dml/database-schema) | Moodle db Schema definitions of Tables. |
+|Entity id | Property | Type | Description |
+|-----------|-----------|-----------|-----------|
+| 1 | id | STRING | Faculty identifier |
+|  | name | STRING | Faculty abbreviation |
+|  | description | STRING | Faculty name |
+|  | active | INT | Flag that indicates if the record is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record upload. |
+| 2 | id | STRING | Program identifier |
+|  | school_id	 | STRING | Faculty identifier |
+|  | name | STRING | Program abbreviation |
+|  | description | STRING | Program name |
+|  | active | INT | Flag that indicates if the record is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record upload. |
+| 3 | id | STRING | Course identifier |
+|  | name | STRING | Course abbreviation |
+|  | description | STRING | Course name |
+|  | active | INT | Flag that indicates if the record is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record upload.|
+| 4 | id | STRING | Term identifier |
+|  | name | STRING | Term name |
+|  | start_datetime | TIMESTAMP | Term start date and time |
+|  | end_datetime | TIMESTAMP | Term end date and time |
+|  | active | INT | Flag that indicates if the record is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record upload.|
+| 5 | id | STRING | Class/group/section identifier |
+|  | course_id | STRING | Course identifier |
+|  | term_id | STRING | Term identifier |
+|  | name | STRING | Class/group/section name |
+|  | active | INT | Flag that indicates if the record is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record upload.|
+| 6 | id | STRING | Student, teacher or program director identifier |
+|  | last_login | TIMESTAMP | Last date and time of access to the LMS|
+|  | active | INT | Flag that indicates if the record is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record upload.|
+| 7 | id | STRING | Enrollment ID |
+|  | class_id | STRING | Class/group/section identifier |
+|  | user_id | STRING | User ID |
+|  | created | TIMESTAMP | Date and time of enrollment |
+|  | active | INT | Flag indicating if the registry is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record creation.|
+| 8 | id | STRING | Enrollment ID |
+|  | class_id | STRING | Class/group/section identifier |
+|  | user_id | STRING | Professor ID |
+|  | created | TIMESTAMP | Date and time of enrollment |
+|  | Active | INT | Flag indicating if the registry is active or has been deleted. |
+|  | Load_datetime | TIMESTAMP | Date and time of the record creation.|
+| 9 | id | STRING | Assignment identifier |
+|  | class_id | STRING | Class/group/section identifier |
+| | start_datetime	| TIMESTAMP	| Assignment start date and time |
+| | due_datetime|	TIMESTAMP	| Assignment submission due date and time |
+| | name	| STRING	| Assignment name |
+| | Active |	INT |	Flag indicating if the registry is active or has been deleted.|
+| | Load_datetime	| TIMESTAMP	| Date and time of record creation.|
+| 10 | id | STRING | Discussion ID |
+|  | class_id | STRING | Class/group/section identifier |
+| | start_datetime	| TIMESTAMP	| Discussion start date and time |
+| | due_datetime|	TIMESTAMP	| Discussion submission due date and time |
+| | name	| STRING	| Discussion/forum name |
+| | Active |	INT |	Flag indicating if the registry is active or has been deleted.|
+| | Load_datetime	| TIMESTAMP	| Date and time of record creation.|
+| 11 | id | STRING | Quiz ID |
+|  | class_id | STRING | Class/group/section identifier |
+| | start_datetime	| TIMESTAMP	| Quiz start date and time |
+| | due_datetime|	TIMESTAMP	| Quiz due date and time |
+| | total_questions|	INT	| Total number of questions in quiz |
+| | name	| STRING	| Quiz name |
+| | Active |	INT |	Flag indicating if the registry is active or has been deleted.|
+| | Load_datetime	| TIMESTAMP	| Date and time of record creation.|
+| 12 | id | STRING | Lesson identifier |
+|  | class_id | STRING | Class/group/section identifier |
+| | start_datetime	| TIMESTAMP	| Lesson start date and time |
+| | due_datetime|	TIMESTAMP	| Lesson due date and time |
+| | total_questions|	INT	| Total number of questions in lesson |
+| | name	| STRING	| Lesson or object name |
+| | Active |	INT |	Flag indicating if the registry is active or has been deleted.|
+| | Load_datetime	| TIMESTAMP	| Date and time of record creation.|
+| 13 | id | STRING | Assignment file ID |
+|  | assignment_id | STRING | Assignment identifier |
+|	| user_id |	STRING |	Student ID |
+|	| file_path |	STRING	| Assignment file name and path within AssignmentBinaries |
+| | Active |	INT |	Flag indicating if the registry is active or has been deleted.|
+| | Load_datetime	| TIMESTAMP	| Date and time of record creation.|
+| 14 |	id	| STRING	| Assignment Submission Attempt identifier |
+| |	assignment_id	| STRING  |	Assignment identifier |
+| |	user_id	| STRING	| Student ID |
+| |	attempt_number|	INT	| Assignment Submission attempt number |
+| |	created	| TIMESTAMP	| Date and time of submission |
+| |	grade	| DECIMAL(18,4)| 	Standardized rating on a scale of 0 to 1, where 0 is the lowest possible grade and 1 is the highest possible grade. |
+| | completed	| INT |	Flag indicating whether this attempt completes the task. |
+| |	active |	INT |	Flag that indicates if the record is active or has been deleted.|
+| |	load_datetime |	TIMESTAMP	| Date and time of the record upload.|
+| 15 |	id	| STRING	| Post identifier |
+|	| discussion_id |	STRING	| Discussion identifier |
+| |	user_id	| STRING	| Student ID |
+| |	created	| TIMESTAMP |	Post date and time of publishing |
+| | post_text	| STRING	| Post text |
+| |	Grade	| DECIMAL(18,4) |	Standardized grade on a scale of 0 to 1, where 0 is the lowest possible grade and 1 is the highest possible grade |
+| |	completed |	INT |	Flag indicating whether this attempt completes participation in the forum.|
+| |	active |	INT	| Flag that indicates if the record is active or has been deleted.|
+| |	load_datetime	| TIMESTAMP |	Date and time of the record upload.|
+| 16 |	id| 	STRING	| Quiz attempt identifier |
+| |	quiz_id	| STRING	| Quiz ID |
+| |	user_id	| STRING	|  Student ID |
+|	| attempt_number	| INT	| Quiz attempt number |
+|	| created	| TIMESTAMP	| Date and time of attempt start |
+|	| modified	| TIMESTAMP |	Date and time of attempt end |
+| |	total_answered |	INT	| Total number of questions that were answered by the student |
+| |	total_not_answered |	INT	| Total number of questions that were not answered by the student |
+| |	correct_answers	| INT |	Total number of questions that were answered correctly by the student |
+| |	wrong_answers |	INT	| Total number of questions that were answered incorrectly by the student |
+| |	undefined_questions|	INT	| Total number of questions that were answered by the student but haven’t been graded |
+| |	grade	|DECIMAL(18,4)|	Standardized grade on a scale of 0 to 1, where 0 is the lowest possible grade and 1 is the highest possible grade |
+| |	completed |	INT |	Flag indicating whether this attempt completes participation in the quiz |
+| |	active |	INT |	Flag that indicates if the record is active or has been deleted. |
+| |	load_datetime	| TIMESTAMP	| Date and time of the record upload.|
+| 17 |	id |	STRING	| Lesson attempt identifier |
+| |	min_seen_datetime	| TIMESTAMP	| Minimum date and time that the student was seen during the attempt |
+| |	max_seen_datetime |	TIMESTAMP |	Maximum date and time that the student was seen during the attempt |
+| |	correct_answers	| INT	| Number of correct answers |
+| |	user_id	| STRING	| Student ID |
+| |	lesson_id	| STRING	| Lesson identifier |
+| |	completed	| INT	| Flag indicating whether this attempt completes participation in the lesson |
+| |	grade| 	DECIMAL(18,4) |	Standardized grade on a scale of 0 to 1, where 0 is the lowest possible grade and 1 is the highest possible grade |
+| |	active	| INT	| Flag that indicates if the record is active or has been deleted.|
+| |	load_datetime |	TIMESTAMP |	Date and time of the record upload.|
+| 18|	id	| STRING	| Message identifier |
+| |	from_user_id |	STRING	| Sender identifier |
+| |	to_user_id |	STRING	| Recipient identifier |
+| |	created	| TIMESTAMP	| Date and time the message was sent |
+| |	message_text |	STRING |	Message text |
+|	| active |	INT	| Flag that indicates if the record is active or has been deleted.|
+| |	load_datetime |	TIMESTAMP	| Date and time of the record upload.|
+| 19	|id	|STRING	| Message identifier |
+| |	from_user_id	| STRING	| Sender identifier |
+| |	to_user_id	| STRING	| Recipient identifier |
+| |	class_id |	STRING |	Class/group/section identifier |
+|	| created	| TIMESTAMP |	Date and time the message was sent |
+| |	message_text |	STRING |	Message text |
+| |	active	| INT	| Flag that indicates if the record is active or has been deleted. |
+| |	load_datetime |	TIMESTAMP	| Date and time of the record upload. |
+| 20 |	Id	| STRING |	Record identifier |
+| |	user_id |	STRING |	Student ID |
+| |	class_id | STRING |	Class/group/section identifier |
+| |	page_views |	INT	| Total number of pages visited up to the current date |
+| |	created	| TIMESTAMP	| Time and date of count |
+| |	active	| INT |	Flag that indicates if the record is active or has been deleted.|
+| |	load_datetime |	TIMESTAMP |	Date and time of the record upload.|
+| 21 |	Id	| STRING	| Record identifier |
+| |	user_id	| STRING	| Student ID |
+| |	class_id |	STRING |	Class/group/section identifier |
+| |	sessions |	INT	| Number of sessions that occurred at the cut |
+| |	Attendance_percentage	| DECIMAL(18,4)	| % of attendance at the cut (0 to 1) |
+| |	created |	TIMESTAMP	| Date and time of report |
+| |	active |	INT |	Flag that indicates if the record is active or has been deleted. |
+| |	load_datetime |	TIMESTAMP |	Date and time of the record upload.|
+| 22 |	id	| STRING	| Record unique identifier |
+| |	user_id	| STRING	| Unique ID for user who provided the answer |
+| |	question_id	| INT	| Question identifier |
+| |	answer	| INT	| Answer’s numeric code |
+| |	created	| TIMESTAMP |	Date and time of answer creation |
+| |	active	| INT	| Flag that indicates if the record is active or has been deleted. |
+| |	load_datetime	| TIMESTAMP	| Date and time of the record upload. |
+| 23 | id	| STRING	| Record unique identifier |
+| |	program_id	| STRING	| Program unique ID |
+| |	user_id	| STRING	| Student ID |
+| |	active	| INT	| Flag that indicates if the record is active or has been deleted.|
+| |	load_datetime	| TIMESTAMP	| Date and time of the record upload.|
+| 24|	id	| STRING	| Record unique identifier |
+| |	course_id |	STRING |	Course unique ID |
+|	 | program_id	| STRING |	Program identifier |
+| |	active |	INT |	Flag that indicates if the record is active or has been deleted.|
+|	| load_datetime	| TIMESTAMP	| Date and time of the record upload.|
+
+## Contributions from the Community
+ 
+The Student Portrait Schema [welcomes contributions](https://github.com/microsoft/OpenEduAnalytics/blob/main/docs/license/CONTRIBUTING.md).
+
+This schema was developed by [Analytikus](https://www.analytikus.com/), with assets developed by [Kwantum Analytics](https://www.kwantumedu.com/). The architecture and reference implementation for all modules is built on [Azure Synapse Analytics](https://azure.microsoft.com/en-us/services/synapse-analytics/) - with [Azure Data Lake Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) as the storage backbone,  and [Azure Active Directory](https://azure.microsoft.com/en-us/services/active-directory/) providing the role-based access control.
+
+# Legal Notices
+Microsoft and any contributors grant you a license to the Microsoft documentation and other content
+in this repository under the [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode),
+see the [LICENSE](LICENSE) file, and grant you a license to any code in the repository under the [MIT License](https://opensource.org/licenses/MIT), see the
+[LICENSE-CODE](LICENSE-CODE) file.
+
+Microsoft, Windows, Microsoft Azure and/or other Microsoft products and services referenced in the documentation may be either trademarks or registered trademarks of Microsoft in the United States and/or other countries. The licenses for this project do not grant you rights to use any Microsoft names, logos, or trademarks.
+Microsoft's general trademark guidelines can be found at http://go.microsoft.com/fwlink/?LinkID=254653.
+
+Privacy information can be found at https://privacy.microsoft.com/en-us/
+
+Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents,
+or trademarks, whether by implication, estoppel or otherwise.
 
